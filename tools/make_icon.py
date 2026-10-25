@@ -2,7 +2,7 @@
 """Generate the epub-reader app icon (product-specific symbol, not the penguin).
 
 An open book drawn flat on solid black with a beak-orange bookmark, per
-the project visual system §10.3 (square corners, solid token colours only).
+the project icon rules (square corners, solid token colours only).
 Run: python3 tools/make_icon.py   (needs pillow)
 Outputs: assets/icon-1024.png, assets/icon-256.png, assets/icon.ico
 """

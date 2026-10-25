@@ -1,5 +1,5 @@
-//! Screens and widgets, styled per the project visual system §10 (dark only,
-//! solid black, square corners, one beak accent).
+//! Screens and widgets, styled with the project visual system: dark only,
+//! solid black, square corners, one beak accent.
 
 use std::collections::HashMap;
 use std::ops::Range;
@@ -19,6 +19,7 @@ use crate::theme;
 
 const WINDOW_ICON: &[u8] = include_bytes!("../assets/icon-256.png");
 const BAR_HEIGHT: f32 = 48.0;
+const TOC_WIDTH: f32 = 190.0;
 
 pub struct ReaderApp {
     pub state: State,
@@ -935,9 +936,9 @@ impl ReaderApp {
         if show_toc {
             egui::Panel::left("reader_toc")
                 .frame(Frame::NONE.fill(theme::BLACK))
-                .resizable(true)
-                .default_size(260.0)
+                .exact_size(TOC_WIDTH)
                 .show(ui, |ui| {
+                    ui.set_min_width(ui.available_width());
                     ui.add_space(12.0);
                     if let Some(texture) = self.texture_for(&ctx, "cover:__") {
                         ui.add(
@@ -1165,9 +1166,11 @@ fn toc_node(ui: &mut Ui, node: &TocNode, depth: usize, current: usize, jump: &mu
                     .font(theme::body_font(theme::BODY_SIZE - 1.0))
                     .color(colour),
             )
+            .truncate()
             .selectable(false)
             .sense(Sense::click()),
         );
+        let response = response.on_hover_text(&node.label);
         if response.clicked() {
             *jump = Some(node.chapter);
         }

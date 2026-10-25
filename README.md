@@ -22,7 +22,7 @@ Reads **EPUB**, **KEPUB** (Kobo EPUB) and **MOBI**.
 
 - EPUB, KEPUB and MOBI
 - Integrated title bar with window controls (native traffic lights on macOS)
-- Cover and chapter jumps in the contents sidebar
+- Compact contents sidebar with cover and chapter jumps
 - Reading progress saved locally per book
 - Settings for UI scale, text size, line spacing and column width
 - Dark-only styling, with the NZ mark and font licences in Settings

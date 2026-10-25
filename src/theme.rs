@@ -1,5 +1,5 @@
 //! Design tokens and egui styling, generated from `brand/tokens.json`.
-//! Values are kept in sync with the tokens file by hand; see the project visual system §10.1.
+//! Values are kept in sync with the tokens file by hand.
 
 use egui::{Color32, CornerRadius, FontData, FontDefinitions, FontFamily, FontId, Visuals};
 
