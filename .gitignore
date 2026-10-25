@@ -1,0 +1,51 @@
+# Secrets: never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.dev.vars
+secrets/
+
+# App signing material: never commit
+*.keystore
+*.jks
+*.p12
+*.p8
+*.mobileprovision
+*.provisionprofile
+*.cer
+*.certSigningRequest
+google-services.json
+GoogleService-Info.plist
+local.properties
+
+# Dependencies and build caches
+node_modules/
+build/
+dist/
+DerivedData/
+.gradle/
+.dart_tool/
+Pods/
+*.xcuserstate
+xcuserdata/
+target/
+__pycache__/
+*.pyc
+.venv/
+.wrangler/
+.cache/
+
+# OS and editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Logs and screenshots from verification runs
+*.log
+screenshots/

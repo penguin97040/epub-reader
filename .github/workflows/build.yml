@@ -1,0 +1,67 @@
+name: build
+
+on:
+  push:
+    branches: ["**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  linux-x64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test
+      - run: cargo build --release --locked
+      - run: cp target/release/epub-reader epub-reader-linux-x64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: epub-reader-linux-x64
+          path: epub-reader-linux-x64
+
+  linux-arm64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-unknown-linux-gnu
+      - run: sudo apt-get update && sudo apt-get install -y gcc-aarch64-linux-gnu
+      - run: cargo build --release --locked --target aarch64-unknown-linux-gnu
+        env:
+          CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
+      - run: cp target/aarch64-unknown-linux-gnu/release/epub-reader epub-reader-linux-arm64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: epub-reader-linux-arm64
+          path: epub-reader-linux-arm64
+
+  windows-x64:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --release --locked
+      - run: cp target/release/epub-reader.exe epub-reader-windows-x64.exe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: epub-reader-windows-x64
+          path: epub-reader-windows-x64.exe
+
+  macos-arm64:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --release --locked
+      - run: cp target/release/epub-reader epub-reader-macos-arm64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: epub-reader-macos-arm64
+          path: epub-reader-macos-arm64
